@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Business Gateway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .result pre {
+            margin-top: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .token-display {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .token-display strong {
+            color: #856404;
+        }
+        .token-display code {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            word-break: break-all;
+            font-size: 11px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .badge.online {
+            background: #d4edda;
+            color: #155724;
+        }
+        .badge.offline {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Business Gateway Test</h1>
+            <p>Prueba de integración del API Gateway</p>
+        </div>
+        
+        <div class="content">
+            <!-- Health Check -->
+            <div class="section">
+                <h2>🏥 Health Check</h2>
+                <button onclick="checkHealth()">Verificar Estado de Servicios</button>
+                <div id="healthResult" class="result"></div>
+            </div>
+
+            <!-- Business-Security Microservice -->
+            <div class="section" style="border-left-color: #28a745;">
+                <h2>🔒 Business-Security (Puerto 8000)</h2>
+                <p style="color: #666; margin-bottom: 15px;">Microservicio de Autenticación y Autorización</p>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #28a745; font-size: 1.1em; margin-bottom: 10px;">📝 Login</h3>
+                    <div class="form-group">
+                        <label>Usuario:</label>
+                        <input type="text" id="usuario" value="admin" placeholder="Usuario">
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" id="password" value="admin123" placeholder="Password">
+                    </div>
+                    <button onclick="login()">🔐 POST /api/auth/login</button>
+                    <div id="loginResult" class="result"></div>
+                    <div id="tokenDisplay" class="token-display"></div>
+                </div>
+
+                <div style="margin-bottom: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                    <h3 style="color: #28a745; font-size: 1.1em; margin-bottom: 10px;">✅ Verificar Token</h3>
+                    <button onclick="verifyToken()">🔍 GET /api/auth/me</button>
+                    <div id="verifyResult" class="result"></div>
+                </div>
+
+                <div style="margin-bottom: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                    <h3 style="color: #28a745; font-size: 1.1em; margin-bottom: 10px;">👥 Usuarios</h3>
+                    <button onclick="getUsuarios()">📋 GET /api/usuarios</button>
+                    <button onclick="createUsuario()" style="margin-left: 10px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">➕ POST /api/usuarios</button>
+                    <div id="usuariosResult" class="result"></div>
+                </div>
+
+                <div style="margin-bottom: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                    <h3 style="color: #28a745; font-size: 1.1em; margin-bottom: 10px;">👔 Perfiles</h3>
+                    <button onclick="getPerfiles()">📋 GET /api/perfiles</button>
+                    <div id="perfilesResult" class="result"></div>
+                </div>
+
+                <div style="padding-top: 20px; border-top: 1px solid #ddd;">
+                    <h3 style="color: #28a745; font-size: 1.1em; margin-bottom: 10px;">📋 Menú</h3>
+                    <button onclick="getMenu()">📋 GET /api/menu</button>
+                    <div id="menuResult" class="result"></div>
+                </div>
+            </div>
+
+            <!-- Business-Licensing Microservice -->
+            <div class="section" style="border-left-color: #fd7e14;">
+                <h2>📜 Business-Licensing (Puerto 3001)</h2>
+                <p style="color: #666; margin-bottom: 15px;">Microservicio de Gestión de Licencias y Módulos</p>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #fd7e14; font-size: 1.1em; margin-bottom: 10px;">📦 Módulos</h3>
+                    <button onclick="getModulos()">📋 GET /api/modulos</button>
+                    <div id="modulosResult" class="result"></div>
+                </div>
+
+                <div style="margin-bottom: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                    <h3 style="color: #fd7e14; font-size: 1.1em; margin-bottom: 10px;">🎫 Licencias</h3>
+                    <button onclick="getLicencias()">📋 GET /api/licencias</button>
+                    <div id="licenciasResult" class="result"></div>
+                </div>
+
+                <div style="padding-top: 20px; border-top: 1px solid #ddd;">
+                    <h3 style="color: #fd7e14; font-size: 1.1em; margin-bottom: 10px;">🏢 Clientes</h3>
+                    <button onclick="getClientesLicensing()">📋 GET /api/clientes-licensing</button>
+                    <div id="clientesLicensingResult" class="result"></div>
+                </div>
+            </div>
+
+            <!-- Business-Empleados Microservice -->
+            <div class="section" style="border-left-color: #17a2b8;">
+                <h2>👨‍💼 Business-Empleados (Puerto 8002)</h2>
+                <p style="color: #666; margin-bottom: 15px;">Microservicio de Gestión de Empleados - Requiere módulo EMPLEADOS</p>
+                
+                <div>
+                    <h3 style="color: #17a2b8; font-size: 1.1em; margin-bottom: 10px;">👥 Empleados</h3>
+                    <button onclick="getEmpleados()">📋 GET /api/empleados</button>
+                    <div id="empleadosResult" class="result"></div>
+                </div>
+            </div>
+
+            <!-- Business-Clientes Microservice -->
+            <div class="section" style="border-left-color: #6f42c1;">
+                <h2>🏢 Business-Clientes (Puerto 8003)</h2>
+                <p style="color: #666; margin-bottom: 15px;">Microservicio de Gestión de Clientes - Requiere módulo CLIENTES</p>
+                
+                <div>
+                    <h3 style="color: #6f42c1; font-size: 1.1em; margin-bottom: 10px;">👥 Clientes</h3>
+                    <button onclick="getClientes()">📋 GET /api/clientes</button>
+                    <div id="clientesResult" class="result"></div>
+                </div>
+            </div>
+
+            <!-- Business-Ventas Microservice -->
+            <div class="section" style="border-left-color: #dc3545;">
+                <h2>💰 Business-Ventas (Puerto 8004)</h2>
+                <p style="color: #666; margin-bottom: 15px;">Microservicio de Gestión de Ventas y Cotizaciones - Requiere módulo VENTAS</p>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #dc3545; font-size: 1.1em; margin-bottom: 10px;">💵 Ventas</h3>
+                    <button onclick="getVentas()">📋 GET /api/ventas</button>
+                    <div id="ventasResult" class="result"></div>
+                </div>
+
+                <div style="padding-top: 20px; border-top: 1px solid #ddd;">
+                    <h3 style="color: #dc3545; font-size: 1.1em; margin-bottom: 10px;">📄 Cotizaciones</h3>
+                    <button onclick="getCotizaciones()">📋 GET /api/cotizaciones</button>
+                    <div id="cotizacionesResult" class="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GATEWAY_URL = 'http://localhost:4000';
+        let authToken = null;
+
+        async function checkHealth() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '⏳ Verificando servicios...';
+
+            try {
+                const response = await fetch(`${GATEWAY_URL}/health`);
+                const data = await response.json();
+                
+                let html = `<strong>Estado del Gateway:</strong> ${data.status}<br><br>`;
+                html += '<strong>Servicios:</strong><br>';
+                
+                data.services.forEach(service => {
+                    const badge = service.status === 'online' ? 
+                        `<span class="badge online">✓ Online</span>` : 
+                        `<span class="badge offline">✗ Offline</span>`;
+                    html += `${service.name} ${badge}<br>`;
+                });
+                
+                html += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                
+                resultDiv.className = 'result ' + (data.status === 'healthy' ? 'success' : 'error');
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+
+        async function login() {
+            const resultDiv = document.getElementById('loginResult');
+            const tokenDiv = document.getElementById('tokenDisplay');
+            const usuario = document.getElementById('usuario').value;
+            const password = document.getElementById('password').value;
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '⏳ Autenticando...';
+            tokenDiv.style.display = 'none';
+
+            try {
+                const response = await fetch(`${GATEWAY_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ usuario, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.access_token) {
+                    authToken = data.access_token;
+                    
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <strong>✅ Login Exitoso!</strong><br><br>
+                        Usuario: <strong>${data.usuario}</strong><br>
+                        Perfil: <strong>${data.perfil || 'N/A'}</strong><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+
+                    tokenDiv.style.display = 'block';
+                    tokenDiv.innerHTML = `
+                        <strong>🔑 Token de Autenticación:</strong>
+                        <code>${authToken}</code>
+                    `;
+                } else {
+                    throw new Error(data.detail || 'Error en login');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+
+        async function verifyToken() {
+            const resultDiv = document.getElementById('verifyResult');
+
+            if (!authToken) {
+                resultDiv.style.display = 'block';
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = '<strong>⚠️ Advertencia:</strong> Primero debes iniciar sesión';
+                return;
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '⏳ Verificando token...';
+
+            try {
+                const response = await fetch(`${GATEWAY_URL}/api/auth/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <strong>✅ Token Válido!</strong><br><br>
+                        Usuario: <strong>${data.usuario}</strong><br>
+                        Perfil: <strong>${data.perfil || 'N/A'}</strong><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    throw new Error(data.detail || 'Token inválido');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+                authToken = null;
+            }
+        }
+
+        async function getUsuarios() {
+            await makeRequest('usuariosResult', 'GET', '/api/usuarios', null, '👥 Usuarios');
+        }
+
+        async function createUsuario() {
+            const resultDiv = document.getElementById('usuariosResult');
+            const usuarioData = {
+                usuario: 'test' + Date.now(),
+                password: 'test123',
+                perfil_id: 1,
+                estado_id: 1
+            };
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '⏳ Creando usuario...';
+            
+            await makeRequest('usuariosResult', 'POST', '/api/usuarios', usuarioData, '👥 Usuario Creado');
+        }
+
+        async function getPerfiles() {
+            await makeRequest('perfilesResult', 'GET', '/api/perfiles', null, '👔 Perfiles');
+        }
+
+        async function getMenu() {
+            await makeRequest('menuResult', 'GET', '/api/menu', null, '📋 Menú');
+        }
+
+        async function getModulos() {
+            await makeRequest('modulosResult', 'GET', '/api/modulos', null, '📦 Módulos');
+        }
+
+        async function getLicencias() {
+            await makeRequest('licenciasResult', 'GET', '/api/licencias', null, '🎫 Licencias');
+        }
+
+        async function getClientesLicensing() {
+            await makeRequest('clientesLicensingResult', 'GET', '/api/clientes-licensing', null, '🏢 Clientes (Licensing)');
+        }
+
+        async function getEmpleados() {
+            await makeRequest('empleadosResult', 'GET', '/api/empleados', null, '👨‍💼 Empleados');
+        }
+
+        async function getClientes() {
+            await makeRequest('clientesResult', 'GET', '/api/clientes', null, '🏢 Clientes');
+        }
+
+        async function getVentas() {
+            await makeRequest('ventasResult', 'GET', '/api/ventas', null, '💵 Ventas');
+        }
+
+        async function getCotizaciones() {
+            await makeRequest('cotizacionesResult', 'GET', '/api/cotizaciones', null, '📄 Cotizaciones');
+        }
+
+        async function makeRequest(resultDivId, method, endpoint, body = null, title = 'Datos') {
+            const resultDiv = document.getElementById(resultDivId);
+
+            if (!authToken && endpoint !== '/health' && endpoint !== '/info') {
+                resultDiv.style.display = 'block';
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = '<strong>⚠️ Advertencia:</strong> Primero debes iniciar sesión';
+                return;
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = `⏳ ${method} ${endpoint}...`;
+
+            try {
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                };
+
+                if (authToken) {
+                    options.headers['Authorization'] = `Bearer ${authToken}`;
+                }
+
+                if (body) {
+                    options.body = JSON.stringify(body);
+                }
+
+                const response = await fetch(`${GATEWAY_URL}${endpoint}`, options);
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    const count = Array.isArray(data) ? data.length : (data.length !== undefined ? data.length : '');
+                    const countText = count !== '' ? ` (${count})` : '';
+                    let html = `<strong>✅ ${title}${countText}</strong><br><br>`;
+                    html += `<strong>Status:</strong> ${response.status} ${response.statusText}<br>`;
+                    html += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    resultDiv.innerHTML = html;
+                } else {
+                    throw new Error(data.detail || data.message || data.error || `Error ${response.status}`);
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+
+        // Verificar health al cargar
+        window.addEventListener('load', () => {
+            setTimeout(checkHealth, 500);
+        });
+    </script>
+</body>
+</html>
