@@ -1,0 +1,78 @@
+# ============================================================
+# BusinessApp — .gitignore global
+# ============================================================
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Node.js
+node_modules/
+dist/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+*.db
+*.sqlite3
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+packages/
+TestResults/
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+*.g.dart
+
+# Android
+Business-Mobile/erpmobile/android/.gradle/
+Business-Mobile/erpmobile/android/local.properties
+Business-Mobile/erpmobile/android/key.properties
+
+# IDEs
+.idea/
+*.iml
+.vscode/settings.json
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Analysis / temp files
+analyze_out.txt
+
+# Elasticsearch data
+elasticsearch_data/
