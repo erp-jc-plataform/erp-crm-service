@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ErpCrmService.Domain/1.0.0": {
+        "runtime": {
+          "ErpCrmService.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ErpCrmService.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

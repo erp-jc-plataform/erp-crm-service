@@ -1,0 +1,16 @@
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\bin\Release\net8.0\ErpCrmService.Application.deps.json
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\bin\Release\net8.0\ErpCrmService.Application.dll
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\bin\Release\net8.0\ErpCrmService.Application.pdb
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\bin\Release\net8.0\ErpCrmService.Domain.dll
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\bin\Release\net8.0\ErpCrmService.Domain.pdb
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmService.Application.csproj.AssemblyReference.cache
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmService.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmService.Application.AssemblyInfoInputs.cache
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmService.Application.AssemblyInfo.cs
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmService.Application.csproj.CoreCompileInputs.cache
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmService.Application.sourcelink.json
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmSe.CC0C027C.Up2Date
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmService.Application.dll
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\refint\ErpCrmService.Application.dll
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ErpCrmService.Application.pdb
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Application\obj\Release\net8.0\ref\ErpCrmService.Application.dll

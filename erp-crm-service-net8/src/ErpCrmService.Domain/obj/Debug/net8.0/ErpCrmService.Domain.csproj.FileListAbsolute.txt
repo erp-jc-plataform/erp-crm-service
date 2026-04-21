@@ -1,0 +1,12 @@
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\bin\Debug\net8.0\ErpCrmService.Domain.deps.json
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\bin\Debug\net8.0\ErpCrmService.Domain.dll
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\bin\Debug\net8.0\ErpCrmService.Domain.pdb
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\ErpCrmService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\ErpCrmService.Domain.AssemblyInfoInputs.cache
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\ErpCrmService.Domain.AssemblyInfo.cs
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\ErpCrmService.Domain.csproj.CoreCompileInputs.cache
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\ErpCrmService.Domain.sourcelink.json
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\ErpCrmService.Domain.dll
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\refint\ErpCrmService.Domain.dll
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\ErpCrmService.Domain.pdb
+C:\Proyectos\BusinessApp\Business-CRM\erp-crm-service-net8\src\ErpCrmService.Domain\obj\Debug\net8.0\ref\ErpCrmService.Domain.dll
